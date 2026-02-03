@@ -72,3 +72,4 @@ public class Patient {
                 ", Age: " + age + ", Condition: " + condition + "}";
     }
 }
+

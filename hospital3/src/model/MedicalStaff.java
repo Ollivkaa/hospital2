@@ -1,7 +1,7 @@
 package model;
 
 public abstract class MedicalStaff {
-    protected int staffId;
+    protected int staffId; // 0 = not saved yet (DB will generate)
     protected String name;
     protected String department;
     protected int experienceYears;
@@ -13,31 +13,17 @@ public abstract class MedicalStaff {
         setExperienceYears(experienceYears);
     }
 
-    // Abstract methods - must be implemented by children
     public abstract void work();
     public abstract String getRole();
 
-    // Getters
-    public int getStaffId() {
-        return staffId;
-    }
+    public int getStaffId() { return staffId; }
+    public String getName() { return name; }
+    public String getDepartment() { return department; }
+    public int getExperienceYears() { return experienceYears; }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public int getExperienceYears() {
-        return experienceYears;
-    }
-
-    // Setters with exception handling
     public void setStaffId(int staffId) {
-        if (staffId <= 0)
-            throw new IllegalArgumentException("Staff ID must be positive");
+        if (staffId < 0)
+            throw new IllegalArgumentException("Staff ID cannot be negative");
         this.staffId = staffId;
     }
 
@@ -59,18 +45,10 @@ public abstract class MedicalStaff {
         this.experienceYears = experienceYears;
     }
 
-    // Concrete method
-    public void displayInfo() {
-        System.out.println(name + " - " + department + " (" + experienceYears + " years)");
-    }
-
-    public boolean isExperienced() {
-        return experienceYears >= 5;
-    }
-
     @Override
     public String toString() {
-        return "[" + getRole() + "] " + name + " (ID: " + staffId +
+        String idText = (staffId == 0) ? "new" : String.valueOf(staffId);
+        return "[" + getRole() + "] " + name + " (ID: " + idText +
                 ", Department: " + department + ", Experience: " + experienceYears + " years)";
     }
 }

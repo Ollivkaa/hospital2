@@ -91,3 +91,4 @@ public class Appointment {
                 ", Doctor: " + doctorName + ", Date: " + date + ", Status: " + status + "}";
     }
 }
+
